@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCTS", "MCTS.csproj", "{ECB66344-663A-4106-9BA9-09570907D10A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECB66344-663A-4106-9BA9-09570907D10A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB66344-663A-4106-9BA9-09570907D10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB66344-663A-4106-9BA9-09570907D10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB66344-663A-4106-9BA9-09570907D10A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D91FDBF-96DA-4811-ABA8-29264D1311C6}
+	EndGlobalSection
+EndGlobal
