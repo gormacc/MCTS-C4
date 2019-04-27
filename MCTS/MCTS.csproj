@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="FieldType.cs" />
+    <Compile Include="Mcts.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
