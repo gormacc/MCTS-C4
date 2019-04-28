@@ -3,7 +3,7 @@
     public enum FieldType
     {
         Empty,
-        Yellow,
-        Red
+        PlayerOne,
+        PlayerTwo
     }
 }

@@ -18,10 +18,10 @@ namespace MCTS
                         case FieldType.Empty:
                             letter = " X ";
                             break;
-                        case FieldType.Yellow:
+                        case FieldType.PlayerOne:
                             letter = " Y ";
                             break;
-                        case FieldType.Red:
+                        case FieldType.PlayerTwo:
                             letter = " R ";
                             break;
                     }
