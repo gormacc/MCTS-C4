@@ -68,15 +68,32 @@ namespace MCTS
                 Fields[rowIndex, column] = FieldType.PlayerTwo;
             }
 
-            // przypisanie stanu gry
-            if (CheckEndGameState(out GameState endState))
+            //sprawdzenie wygranej
+            if (CheckWin(rowIndex, column, out GameState winState))
             {
-                State = endState;
+                State = winState;
+                return;
+            }
+
+            // przypadek remisu
+            if (CheckEndGameState())
+            {
+                State = GameState.Draw;
             }
             else
             {
                 State = board.State == GameState.Player1Turn ? GameState.Player2Turn : GameState.Player1Turn;
             }
+        }
+
+        public List<int> GetAvailableColumns()
+        {
+            var columns = new List<int>();
+            for (int i = 0; i < Columns; i++)
+            {
+                if (Fields[0, i] == FieldType.Empty) columns.Add(i);
+            }
+            return columns;
         }
 
         private int EmptyRowIndex(int column)
@@ -89,17 +106,9 @@ namespace MCTS
             return 0;
         }
 
-        private bool CheckEndGameState(out GameState endStates)
+        private bool CheckEndGameState()
         {
-            // sprawdzenie wygranej jednego z graczy
-            if (CheckWin(out GameState winState))
-            {
-                endStates = winState;
-                return true;
-            }
-
             // sprawdzenie remisu
-            endStates = GameState.Draw;
             for (int i = 0; i < Columns; i++)
             {
                 if (Fields[0, i] == FieldType.Empty) return false;
@@ -108,22 +117,87 @@ namespace MCTS
             return true;
         }
 
-        private bool CheckWin(out GameState winState)
+        private bool CheckWin(int row, int col, out GameState winState)
         {
+            int left = 0, right = 0, up = 0, down = 0, leftUp = 0, leftDown = 0, rightUp = 0, rightDown = 0;
+            FieldType checkType = Fields[row, col];
+            int i, j;
             winState = GameState.Draw;
+
+            // left
+            for (i = col - 1; i >= 0; i--)
+            {
+                if (Fields[row, i] == checkType) { left += 1; } else { break; }
+            }
+
+            // right
+            for (i = col + 1; i < Columns; i++)
+            {
+                if (Fields[row, i] == checkType) { right += 1; } else { break; }
+            }
+
+            // up
+            for (i = row - 1; i >= 0; i--)
+            {
+                if (Fields[i, col] == checkType) { up += 1; } else { break; }
+            }
+
+            // down
+            for (i = row + 1; i < Rows; i++)
+            {
+                if (Fields[i, col] == checkType) { down += 1; } else { break; }
+            }
+
+            // leftUp
+            i = row - 1;
+            j = col - 1;
+            while (i >= 0 && j >= 0)
+            {
+                if (Fields[i, j] == checkType) { leftUp += 1; } else { break; }
+                i-=1;
+                j-=1;
+            }
+
+            // leftDown
+            i = row + 1;
+            j = col - 1;
+            while (i < Rows && j >= 0)
+            {
+                if (Fields[i, j] == checkType) { leftDown += 1; } else { break; }
+                i += 1;
+                j -= 1;
+            }
+
+            // rightDown
+            i = row + 1;
+            j = col + 1;
+            while (i < Rows && j < Columns)
+            {
+                if (Fields[i, j] == checkType) { rightDown += 1; } else { break; }
+                i += 1;
+                j += 1;
+            }
+
+            // rightUp
+            i = row - 1;
+            j = col + 1;
+            while (i >= 0 && j < Columns)
+            {
+                if (Fields[i, j] == checkType) { rightUp += 1; } else { break; }
+                i -= 1;
+                j += 1;
+            }
+
+            if (up + down >= 3 || left + right >= 3 || leftDown + rightUp >= 3 || leftUp + rightDown >= 3)
+            {
+                winState = checkType == FieldType.PlayerOne ? GameState.Player1Win : GameState.Player2Win;
+                return true;
+            }
+
             return false;
-            //todo
         }
 
-        public List<int> GetAvailableColumns()
-        {
-            var columns = new List<int>();
-            for (int i = 0; i < Columns; i++)
-            {
-                if(Fields[0,i] == FieldType.Empty) columns.Add(i);
-            }
-            return columns;
-        }
+
 
     }
 }

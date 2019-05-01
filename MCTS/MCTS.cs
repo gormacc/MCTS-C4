@@ -8,12 +8,14 @@ namespace MCTS
 
         private Node _currNode; // obecny stan gry
 
-        private int _secondsToProcess = 1;
+        private readonly int _miliSecondsToProcess;
 
-        private double _explorationFactor = Math.Sqrt(2);
+        private readonly double _explorationFactor;
 
-        public Mcts()
+        public Mcts(int miliSeconds, double explorationFactor)
         {
+            _miliSecondsToProcess = miliSeconds;
+            _explorationFactor = explorationFactor;
             _rootNode = new Node(new Board(), null);
             _currNode = _rootNode;
         }
@@ -37,10 +39,12 @@ namespace MCTS
             return _currNode.NodeBoard;
         }
 
+        public bool IsEnd => _currNode != null && _currNode.NodeBoard.GameEnded;
+
         private void Expand()
         {
             var startTime = DateTime.Now;
-            while ((DateTime.Now - startTime).Seconds < _secondsToProcess)
+            while ((DateTime.Now - startTime).TotalMilliseconds < _miliSecondsToProcess)
             {
                 var node = FindNodeToTest();
                 var result = Simulate(node);
@@ -76,7 +80,7 @@ namespace MCTS
             for (int i = 0; i < node.Childs.Length; i++)
             {
                 var child = node.Childs[i];
-                if (child == null) continue;
+                if (child == null || node.NodeBoard.Fields[0,i] != FieldType.Empty) continue;
 
                 var winRate = child.PlayerOneWin / child.Visited;
                 if (node.NodeBoard.State == GameState.Player2Turn)

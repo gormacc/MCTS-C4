@@ -36,7 +36,7 @@ namespace MCTS
 
         static void Main(string[] args)
         {
-            var program = new Mcts();
+            var program = new Mcts(100, 0.5);
 
             ConsoleKeyInfo key;
             do
@@ -86,7 +86,7 @@ namespace MCTS
                 }
 
 
-            } while (key.Key != ConsoleKey.Escape);
+            } while (key.Key != ConsoleKey.Escape && program.IsEnd == false);
 
 
             Console.WriteLine("Koniec...");
