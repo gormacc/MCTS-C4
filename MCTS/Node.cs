@@ -2,9 +2,9 @@
 {
     public class Node
     {
-        public int PlayerOneWin { get; set; }
+        public double PlayerOneWin { get; set; }
 
-        public int Visited { get; set; }
+        public double Visited { get; set; }
 
         public Node Parent { get; set; }
 

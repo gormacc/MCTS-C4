@@ -4,6 +4,8 @@
     {
         Player1Turn,
         Player2Turn,
-        EndGame
+        Player1Win,
+        Player2Win,
+        Draw
     }
 }

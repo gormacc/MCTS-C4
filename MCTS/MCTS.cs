@@ -4,24 +4,32 @@ namespace MCTS
 {
     public class Mcts
     {
-        // konstruktor
-
         private Node _rootNode; // korzeń całego drzewa
 
         private Node _currNode; // obecny stan gry
 
-        private int _secondsToProcess = 2;
+        private int _secondsToProcess = 1;
 
         private double _explorationFactor = Math.Sqrt(2);
 
+        public Mcts()
+        {
+            _rootNode = new Node(new Board(), null);
+            _currNode = _rootNode;
+        }
+
+        // todo zapis i wczytanie całego drzewa
+
         public void MakeMove(int column)
         {
-            // todo
+            Expand();
+            var newBoard = new Board(_currNode.NodeBoard, column);
+            _currNode = new Node(newBoard, _currNode);
         }
 
         public int GenerateMove()
         {
-            return 0; //todo
+            return FindBestChildIndex(_currNode);
         }
 
         public Board GetBoard()
@@ -29,31 +37,30 @@ namespace MCTS
             return _currNode.NodeBoard;
         }
 
-        private void Search()
+        private void Expand()
         {
             var startTime = DateTime.Now;
             while ((DateTime.Now - startTime).Seconds < _secondsToProcess)
             {
-                
+                var node = FindNodeToTest();
+                var result = Simulate(node);
+                UpdateStats(node, result);
             }
         }
 
         private Node FindNodeToTest()
         {
             var currN = _currNode;
-            while (currN.AllChildsCreated == false || currN.NodeBoard.State == GameState.EndGame)
+            while (currN.AllChildsCreated && currN.NodeBoard.GameEnded == false)
             {
                 var bestChildIndex = FindBestChildIndex(currN);
                 currN = currN.Childs[bestChildIndex];
             }
-
             
-
-            if (currN.AllChildsCreated == false)
+            if (currN.AllChildsCreated == false && currN.NodeBoard.GameEnded == false)
             {
                 var createdChildIndex = currN.CreateChild();
                 return currN.Childs[createdChildIndex];
-                // todo tu skończyłem
             }
             else
             {
@@ -87,6 +94,35 @@ namespace MCTS
             }
 
             return bestChildIndex;
+        }
+
+        private GameState Simulate(Node node)
+        {
+            if (node.NodeBoard.GameEnded) return node.NodeBoard.State;
+
+            var tmpBoard = new Board(node.NodeBoard);
+            var rand = new Random(DateTime.Now.Millisecond);
+            while (tmpBoard.GameEnded == false)
+            {
+                var availableColumns = tmpBoard.GetAvailableColumns();
+                var index = rand.Next() % availableColumns.Count;
+                tmpBoard = new Board(tmpBoard, availableColumns[index]);
+            }
+
+            return tmpBoard.State;
+        }
+
+        private void UpdateStats(Node currN, GameState state)
+        {
+            var node = currN;
+            while (node != null)
+            {
+                if (state == GameState.Player1Win) node.PlayerOneWin += 1;
+                if (state == GameState.Draw) node.PlayerOneWin += 0.5;
+                node.Visited += 1;
+
+                node = node.Parent;
+            }
         }
     }
 }
