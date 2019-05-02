@@ -19,16 +19,7 @@
             NodeBoard = board;
             Parent = parent;
             Childs = new Node[board.Columns];
-            if (parent != null)
-            {
-                for (int i = 0; i < parent.Childs.Length; i++)
-                {
-                    Childs[i] = parent.Childs[i];
-                }
-                CheckForAllChildsCreated();
-                Visited = parent.Visited;
-                PlayerOneWin = parent.PlayerOneWin;
-            }
+            CheckForAllChildsCreated();
         }
 
         public int CreateChild()

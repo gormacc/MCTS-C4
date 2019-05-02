@@ -88,6 +88,10 @@ namespace MCTS
 
             } while (key.Key != ConsoleKey.Escape && program.IsEnd == false);
 
+            Console.WriteLine();
+            Console.WriteLine();
+
+            DrawBoard(program.GetBoard());
 
             Console.WriteLine("Koniec...");
             Console.ReadKey();

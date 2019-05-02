@@ -25,8 +25,7 @@ namespace MCTS
         public void MakeMove(int column)
         {
             Expand();
-            var newBoard = new Board(_currNode.NodeBoard, column);
-            _currNode = new Node(newBoard, _currNode);
+            _currNode = _currNode.Childs[column];
         }
 
         public int GenerateMove()
