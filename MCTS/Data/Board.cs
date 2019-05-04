@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace MCTS
+namespace MCTS.Data
 {
     public class Board
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using MCTS.Data;
 
 namespace MCTS
 {

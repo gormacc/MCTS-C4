@@ -1,4 +1,4 @@
-﻿namespace MCTS
+﻿namespace MCTS.Data
 {
     public class Node
     {
