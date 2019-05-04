@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using MCTS.Data;
 
 namespace MCTS
@@ -37,7 +38,11 @@ namespace MCTS
 
         static void Main(string[] args)
         {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "data.xml");
+
             var program = new Mcts(100, 0.5);
+
+            program.LoadFromXml(filePath);
 
             ConsoleKeyInfo key;
             do
@@ -93,6 +98,8 @@ namespace MCTS
             Console.WriteLine();
 
             DrawBoard(program.GetBoard());
+
+            program.SaveToXml(filePath);
 
             Console.WriteLine("Koniec...");
             Console.ReadKey();

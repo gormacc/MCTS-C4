@@ -8,9 +8,9 @@ namespace MCTS.Data
 
         public int Columns { get; } = 7;
 
-        public FieldType[,] Fields { get; private set; }
+        public FieldType[,] Fields { get; private set; } // plansza
 
-        public GameState State { get; private set; }
+        public GameState State { get; set; } // stan gry
 
         public bool GameEnded => State == GameState.Draw || State == GameState.Player1Win || State == GameState.Player2Win;
 
@@ -85,6 +85,7 @@ namespace MCTS.Data
             }
         }
 
+        // możliwe ruchy
         public List<int> GetAvailableColumns()
         {
             var columns = new List<int>();
@@ -95,6 +96,7 @@ namespace MCTS.Data
             return columns;
         }
 
+        // indeks pustego wiersza danej kolumny
         private int EmptyRowIndex(int column)
         {
             for (int i = Rows-1; i >= 0; i--)

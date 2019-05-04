@@ -50,6 +50,8 @@
     <Compile Include="Data\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\NodeDto.cs" />
+    <Compile Include="Serialization\XmlDataStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
