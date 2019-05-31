@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCTS", "MCTS.csproj", "{ECB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect4GUI", "..\Connect4GUI\Connect4GUI.csproj", "{32E40CE7-D689-436A-A004-AD4473D32167}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAndLearning", "..\TestAndLearning\TestAndLearning.csproj", "{ACF14A83-8670-4735-BB9B-11C030DC113A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{32E40CE7-D689-436A-A004-AD4473D32167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32E40CE7-D689-436A-A004-AD4473D32167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32E40CE7-D689-436A-A004-AD4473D32167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF14A83-8670-4735-BB9B-11C030DC113A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF14A83-8670-4735-BB9B-11C030DC113A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF14A83-8670-4735-BB9B-11C030DC113A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF14A83-8670-4735-BB9B-11C030DC113A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

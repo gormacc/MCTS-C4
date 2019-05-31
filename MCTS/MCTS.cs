@@ -25,6 +25,11 @@ namespace MCTS
             _currNode = _rootNode;
         }
 
+        public void BackToRoot()
+        {
+            _currNode = _rootNode;
+        }
+
         //zapis całego drzewa do xml
         public void SaveToXml(string filePath)
         {
@@ -99,6 +104,27 @@ namespace MCTS
         public void MakeMove(int column)
         {
             Expand();
+
+            // na wypadek wykonania nieprawidłowego ruchu
+            if (_currNode.Childs[column] == null)
+            {
+                if (_currNode.AllChildsCreated)
+                {
+                    for (int i = 0; i < _currNode.Childs.Length; i++)
+                    {
+                        if (_currNode.Childs[i] != null)
+                        {
+                            column = i;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    column = _currNode.CreateChild(_idCounter++);
+                }
+            }
+
             _currNode = _currNode.Childs[column];
         }
 
