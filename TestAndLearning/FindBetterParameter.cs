@@ -15,7 +15,7 @@ namespace TestAndLearning
             int firstParameterWins = 0;
             int secondParameterWins = 0;
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var resultOne = SimulateGame(timeInMs, firstParameter, secondParameter);
 

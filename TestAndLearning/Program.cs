@@ -15,13 +15,13 @@ namespace TestAndLearning
             {
                 for (int j = 1; j < 30; j++)
                 {
-                    if(i == j) continue;
+                    if(i == j || i < j) continue;
 
                     double firstParam = (double)i / 10;
                     double secondParam = (double)j / 10;
 
-                    var output = FindBetterParameter.CompareParameters(100, firstParam, secondParam);
-                    File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "results.txt"), output);
+                    var output = FindBetterParameter.CompareParameters(50, firstParam, secondParam);
+                    File.AppendAllText(Path.Combine(Directory.GetCurrentDirectory(), "results.txt"), output);
                 }
             }
 
